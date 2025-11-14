@@ -1,139 +1,607 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — My GitHub Repos</title>
-  <style>
-    :root{--bg:#f9fafb;--card:#ffffff;--muted:#64748b;--accent:#2563eb;--text:#0f172a}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:var(--text);min-height:100vh}
-    .wrap{max-width:1100px;margin:36px auto;padding:20px}
-    header{display:flex;gap:12px;align-items:center;justify-content:space-between}
-    h1{margin:0;font-size:20px}
-    .controls{display:flex;gap:8px;align-items:center}
-    input,select,button{background:var(--card);border:1px solid #d1d5db;padding:8px 10px;border-radius:8px;color:inherit}
-    button{cursor:pointer;background:var(--accent);color:white;border:none}
-    .meta{margin-top:6px;color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:18px}
-    .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid #e2e8f0;min-height:120px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-    .repo-title{display:flex;justify-content:space-between;gap:8px;align-items:start}
-    .repo-title a{color:var(--accent);text-decoration:none;font-weight:600}
-    .desc{color:var(--muted);font-size:13px;flex:1}
-    .stats{display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
-    .tag{background:#f1f5f9;padding:4px 8px;border-radius:999px;font-size:12px}
-    .spinner{border:3px solid #e2e8f0;border-top:3px solid var(--accent);border-radius:50%;width:20px;height:20px;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
-    .small{font-size:12px;color:var(--muted)}
-    .row{display:flex;gap:8px;align-items:center}
-    .hidden{display:none}
-    @media (max-width:480px){header{flex-direction:column;align-items:stretch}}
-  </style>
-</head>
-<body>
-  <div class="wrap">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - นักศึกษา</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f4f4f4;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header & Navigation */
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        transition: opacity 0.3s;
+      }
+
+      nav a:hover {
+        opacity: 0.8;
+      }
+
+      /* Profile Section */
+      .profile {
+        background: white;
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid #667eea;
+        margin-bottom: 1.5rem;
+      }
+
+      .profile h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .profile h2 {
+        font-size: 1.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .profile-info {
+        max-width: 800px;
+        margin: 0 auto;
+        color: #666;
+      }
+
+      .profile-info p {
+        margin: 0.5rem 0;
+      }
+
+      /* Section Styles */
+      section {
+        padding: 4rem 0;
+      }
+
+      section:nth-child(even) {
+        background: white;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 3rem;
+        color: #333;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-category {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      section:nth-child(even) .skill-category {
+        background: #f9f9f9;
+      }
+
+      .skill-category:hover {
+        transform: translateY(-5px);
+      }
+
+      .skill-category h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .skill-category ul {
+        list-style: none;
+      }
+
+      .skill-category li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .skill-category li:last-child {
+        border-bottom: none;
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      section:nth-child(even) .project-card {
+        background: #f9f9f9;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .project-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      .project-content h3 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-content p {
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background: #764ba2;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .btn-secondary:hover {
+        background: #5a6268;
+      }
+
+      /* Education & Activities */
+      .timeline {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline-item {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #667eea;
+      }
+
+      section:nth-child(even) .timeline-item {
+        background: #f9f9f9;
+      }
+
+      .timeline-item h3 {
+        color: #667eea;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item .date {
+        color: #999;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item p {
+        color: #666;
+      }
+
+      /* Contact Section */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .contact-item {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .contact-item i {
+        font-size: 2rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .contact-item a {
+        color: #333;
+        text-decoration: none;
+      }
+
+      .contact-item a:hover {
+        color: #667eea;
+      }
+
+      /* Footer */
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        nav ul {
+          gap: 1rem;
+        }
+
+        .profile h1 {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
     <header>
-      <div>
-        <h1>Portfolio — My GitHub Repositories</h1>
-        <div class="meta">รายการ repository จาก GitHub ของคุณ</div>
-      </div>
+      <nav class="container">
+        <div class="logo">My Portfolio</div>
+        <ul>
+          <li><a href="#profile">แนะนำตัว</a></li>
+          <li><a href="#skills">ทักษะ</a></li>
+          <li><a href="#projects">ผลงาน</a></li>
+          <li><a href="#education">การศึกษา</a></li>
+          <li><a href="#activities">กิจกรรม</a></li>
+          <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <section style="margin-top:14px">
-      <div class="row" style="justify-content:space-between;align-items:center">
-        <div class="row">
-          <label class="small">ค้นหา:</label>
-          <input id="q" placeholder="ค้นหา repo (ชื่อหรือคำอธิบาย)" />
+    <!-- Profile Section -->
+    <section id="profile" class="profile">
+      <div class="container">
+        <img
+          src="https://via.placeholder.com/200"
+          alt="Profile Picture"
+          class="profile-img"
+        />
+        <h1>ชื่อ นามสกุล</h1>
+        <h2>Name Surname</h2>
+        <div class="profile-info">
+          <p><strong>คณะ:</strong> คณะวิทยาศาสตร์</p>
+          <p><strong>สาขา:</strong> วิทยาการคอมพิวเตอร์</p>
+          <p><strong>มหาวิทยาลัย:</strong> มหาวิทยาลัยราชภัฏอุดรธานี</p>
+          <p><strong>สถานะ:</strong> นักศึกษาปี 3 (2566 - ปัจจุบัน)</p>
+          <p style="margin-top: 1rem">
+            <strong>ความสนใจ:</strong> Artificial Intelligence, Web Development,
+            Data Science
+          </p>
+          <p style="margin-top: 1rem; font-style: italic">
+            "เป้าหมายของฉันคือการพัฒนาทักษะด้านเทคโนโลยีและนำความรู้ไปใช้สร้างสรรค์สิ่งที่เป็นประโยชน์ต่อสังคม"
+          </p>
         </div>
-        <div id="status" class="small">Ready</div>
       </div>
-
-      <div id="grid" class="grid"></div>
-      <div id="empty" class="small hidden">ไม่พบ repositories</div>
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">ทักษะ (Skills)</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3><i class="fas fa-code"></i> Programming</h3>
+            <ul>
+              <li>Python</li>
+              <li>Java</li>
+              <li>HTML/CSS</li>
+              <li>JavaScript</li>
+              <li>C++</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-brain"></i> AI & Data</h3>
+            <ul>
+              <li>TensorFlow</li>
+              <li>scikit-learn</li>
+              <li>Pandas & NumPy</li>
+              <li>Power BI</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+            <ul>
+              <li>Git & GitHub</li>
+              <li>VS Code</li>
+              <li>Figma</li>
+              <li>Google Colab</li>
+              <li>Docker</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-users"></i> Soft Skills</h3>
+            <ul>
+              <li>การสื่อสารที่ดี</li>
+              <li>การทำงานเป็นทีม</li>
+              <li>การแก้ปัญหา</li>
+              <li>การจัดการเวลา</li>
+              <li>ความคิดสร้างสรรค์</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">ผลงานที่ผ่านมา (Projects)</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-img"></div>
+            <div class="project-content">
+              <h3>ระบบจองห้องประชุมออนไลน์</h3>
+              <p>
+                เว็บแอปพลิเคชันสำหรับจัดการการจองห้องประชุมภายในมหาวิทยาลัย
+                พัฒนาด้วย HTML, CSS, JavaScript และ PHP
+              </p>
+              <div class="project-links">
+                <a href="#" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="btn btn-secondary"
+                  ><i class="fas fa-external-link-alt"></i> Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-img"></div>
+            <div class="project-content">
+              <h3>AI ทำนายโรคเบาหวาน</h3>
+              <p>
+                โมเดล Machine Learning
+                ที่ใช้ทำนายความเสี่ยงของโรคเบาหวานจากข้อมูลสุขภาพ ใช้ Python และ
+                scikit-learn
+              </p>
+              <div class="project-links">
+                <a href="#" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="btn btn-secondary"
+                  ><i class="fas fa-file-alt"></i> Report</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-img"></div>
+            <div class="project-content">
+              <h3>Dashboard วิเคราะห์ข้อมูลร้านกาแฟ</h3>
+              <p>
+                แดชบอร์ดแสดงผลการวิเคราะห์ยอดขายและพฤติกรรมลูกค้า สร้างด้วย
+                Power BI และ Python
+              </p>
+              <div class="project-links">
+                <a href="#" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="btn btn-secondary"
+                  ><i class="fas fa-chart-bar"></i> View</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <div class="container">
+        <h2 class="section-title">การศึกษา (Education)</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>วิทยาศาสตรบัณฑิต สาขาวิทยาการคอมพิวเตอร์</h3>
+            <div class="date">2566 - ปัจจุบัน</div>
+            <p>คณะวิทยาศาสตร์ มหาวิทยาลัยราชภัฏอุดรธานี</p>
+            <p>เกรดเฉลี่ย: 3.XX</p>
+          </div>
+          <div class="timeline-item">
+            <h3>มัธยมศึกษาตอนปลาย</h3>
+            <div class="date">2563 - 2565</div>
+            <p>โรงเรียน [ชื่อโรงเรียน]</p>
+            <p>แผนการเรียน: วิทย์-คณิต</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities">
+      <div class="container">
+        <h2 class="section-title">
+          กิจกรรมและผลงาน (Activities & Achievements)
+        </h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3><i class="fas fa-trophy"></i> รางวัลชนะเลิศโครงงานด้าน IoT</h3>
+            <div class="date">2568</div>
+            <p>
+              ได้รับรางวัลชนะเลิศในการแข่งขันพัฒนาโครงงาน IoT ระดับมหาวิทยาลัย
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h3><i class="fas fa-laptop-code"></i> UDRU Hackathon 2025</h3>
+            <div class="date">2568</div>
+            <p>
+              เข้าร่วมการแข่งขัน Hackathon ระดับมหาวิทยาลัย
+              พัฒนาแอปพลิเคชันภายใน 24 ชั่วโมง
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h3>
+              <i class="fas fa-certificate"></i> AI for Beginners by Microsoft
+            </h3>
+            <div class="date">2567</div>
+            <p>ผ่านการอบรมหลักสูตร AI for Beginners จาก Microsoft Learn</p>
+          </div>
+          <div class="timeline-item">
+            <h3><i class="fas fa-users"></i> กิจกรรมจิตอาสา</h3>
+            <div class="date">2566 - ปัจจุบัน</div>
+            <p>เข้าร่วมกิจกรรมจิตอาสาสอนคอมพิวเตอร์ให้กับเด็กในชุมชน</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">ติดต่อ (Contact)</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <h3>GitHub</h3>
+            <a href="https://github.com/yourusername" target="_blank"
+              >@yourusername</a
+            >
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-linkedin"></i>
+            <h3>LinkedIn</h3>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank"
+              >Your Profile</a
+            >
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-facebook"></i>
+            <h3>Facebook</h3>
+            <a href="https://facebook.com/yourprofile" target="_blank"
+              >Your Profile</a
+            >
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Location</h3>
+            <p>อุดรธานี, ประเทศไทย</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      สร้างด้วย HTML/JS — ใช้ GitHub API สาธารณะ (rate limit ของ GitHub อาจจำกัด)
+      <div class="container">
+        <p>&copy; 2025 [ชื่อของคุณ]. All rights reserved.</p>
+        <p>
+          Made with <i class="fas fa-heart" style="color: #e74c3c"></i> by
+          Student
+        </p>
+      </div>
     </footer>
-  </div>
-
-  <script>
-    // ตั้งค่าชื่อผู้ใช้ GitHub ของคุณที่นี่
-    const GITHUB_USERNAME = 'OkayOkay101'; // 👉 แก้ตรงนี้เป็นชื่อผู้ใช้จริงของคุณ เช่น 'torvalds'
-
-    const $ = id => document.getElementById(id);
-    const grid = $('grid');
-    const status = $('status');
-    const empty = $('empty');
-    const qInput = $('q');
-
-    function setStatus(txt){ status.textContent = txt; }
-
-    function humanDate(iso){
-      try{ const d = new Date(iso); return d.toLocaleString(); }catch(e){return iso}
-    }
-
-    function render(repos){
-      grid.innerHTML = '';
-      if(!repos || repos.length===0){ empty.classList.remove('hidden'); return }
-      empty.classList.add('hidden');
-      repos.forEach(r => {
-        const card = document.createElement('div'); card.className='card';
-        const title = document.createElement('div'); title.className='repo-title';
-        const a = document.createElement('a'); a.href = r.html_url; a.target='_blank'; a.rel='noopener'; a.textContent = r.name;
-        const vis = document.createElement('div'); vis.className='small'; vis.textContent = r.private? 'private':'public';
-        title.appendChild(a); title.appendChild(vis);
-        card.appendChild(title);
-
-        const desc = document.createElement('div'); desc.className='desc'; desc.textContent = r.description || '';
-        card.appendChild(desc);
-
-        const stats = document.createElement('div'); stats.className='stats';
-        const star = document.createElement('span'); star.className='tag'; star.textContent = '★ ' + r.stargazers_count;
-        const fork = document.createElement('span'); fork.className='tag'; fork.textContent = '⑂ ' + r.forks_count;
-        const lang = document.createElement('span'); lang.className='tag'; lang.textContent = r.language || '—';
-        const updated = document.createElement('span'); updated.className='small'; updated.textContent = 'Updated: ' + humanDate(r.updated_at);
-        stats.appendChild(star); stats.appendChild(fork); stats.appendChild(lang); stats.appendChild(updated);
-        card.appendChild(stats);
-
-        grid.appendChild(card);
-      });
-    }
-
-    async function loadRepos(){
-      setStatus('Loading…');
-      try{
-        const url = `https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?per_page=100`;
-        const resp = await fetch(url);
-        if(!resp.ok) { setStatus('ไม่สามารถโหลดข้อมูล'); return }
-        const repos = await resp.json();
-        repos.sort((a,b)=> new Date(b.updated_at) - new Date(a.updated_at));
-        render(repos);
-        setStatus(`Loaded ${repos.length} repos`);
-      }catch(err){
-        console.error(err);
-        setStatus('เกิดข้อผิดพลาด');
-      }
-    }
-
-    function applyFilters(repos){
-      const q = qInput.value.trim().toLowerCase();
-      if(!q){ render(repos); setStatus(`Loaded ${repos.length} repos`); return; }
-      const filtered = repos.filter(r=> (r.name + ' ' + (r.description||'')).toLowerCase().includes(q));
-      render(filtered);
-      setStatus(`Showing ${filtered.length} / ${repos.length}`);
-    }
-
-    let allRepos = [];
-
-    loadRepos().then(async ()=>{
-      const url = `https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?per_page=100`;
-      const resp = await fetch(url);
-      if(resp.ok) allRepos = await resp.json();
-    });
-
-    qInput.addEventListener('input', ()=> applyFilters(allRepos));
-  </script>
-</body>
+  </body>
 </html>
